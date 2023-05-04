@@ -5,10 +5,10 @@ export default function WeatherInfo(props) {
   return (
     <div className="WeatherInfo">
       <h1>{props.data.city}</h1>
-      <p>
+      <span>
         <FormattedDate date={props.data.date} />
         <span className="text-capitalize">{props.data.description}</span>{" "}
-      </p>
+      </span>
       <h2>
         <img src={props.data.icon_url} alt={props.data.description} />
         <span className="temperature">

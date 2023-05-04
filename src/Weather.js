@@ -6,8 +6,8 @@ import "./Weather.css";
 export default function Weather(props) {
   const [weatherData, setWeatherData] = useState({ ready: false });
   const [city, setCity] = useState(props.defaultCity);
+
   function handleSubmit(response) {
-    console.log(response.date);
     setWeatherData({
       ready: true,
       temperature: response.data.temperature.current,
@@ -16,16 +16,8 @@ export default function Weather(props) {
       wind: response.data.wind.speed,
       humidity: response.data.temperature.humidity,
       description: response.data.condition.description,
-      icon_url:
-        "http://shecodes-assets.s3.amazonaws.com/api/weather/icons/mist-day.png",
+      icon_url: `https://shecodes-assets.s3.amazonaws.com/api/weather/icons/${response.data.condition.icon}.png`,
     });
-  }
-
-  function search() {
-    const apiKey = "0td6fef782e8b046o3c9bf5a39fbbf05";
-    let city = "Tehran";
-    let apiUrl = `https://api.shecodes.io/weather/v1/current?query=${city}&key=${apiKey}&units=metric`;
-    axios.get(apiUrl).then(handleSubmit);
   }
 
   function handleSearch(event) {
@@ -35,6 +27,13 @@ export default function Weather(props) {
 
   function handleCityChange(event) {
     setCity(event.target.value);
+  }
+
+  function search() {
+    const apiKey = "0td6fef782e8b046o3c9bf5a39fbbf05";
+    let city = "Tehran";
+    let apiUrl = `https://api.shecodes.io/weather/v1/current?query=${city}&key=${apiKey}&units=metric`;
+    axios.get(apiUrl).then(handleSubmit);
   }
 
   if (weatherData.ready) {
