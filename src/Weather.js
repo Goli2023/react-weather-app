@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import WeatherInfo from "./Weatherinfo";
-import WeatherIcon from "./WeatherIcon";
 import axios from "axios";
 import "./Weather.css";
 
@@ -17,7 +16,7 @@ export default function Weather(props) {
       wind: response.data.wind.speed,
       humidity: response.data.temperature.humidity,
       description: response.data.condition.description,
-      icon: response.data.weather[0].icon,
+      icon: `https://shecodes-assets.s3.amazonaws.com/api/weather/icons/${response.data.condition.icon}.png`,
     });
   }
 
