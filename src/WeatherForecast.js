@@ -4,19 +4,14 @@ import axios from "axios";
 
 export default function WeatherForcast(props) {
   let [loaded, setLoaded] = useState(false);
+  let [forecast, setForecast] = useState(null);
   function handleResponse(response) {
+    setForecast(response.date.daily);
+    setLoaded(true);
   }
 
   if (loaded) {
-    let apiKey = "0td6fef782e8b046o3c9bf5a39fbbf05";
-    let city = props.data.city;
-    let icon=props.data.daily.condition.icon;
-    let apiUrl = `https://api.shecodes.io/weather/v1/forecast?query=${city}&key=${apiKey}&units=metric`;
-
-    axios.get(apiUrl).then(handleResponse);
-
-    return null;
-  } else {
+    let icon = props.data.daily.condition.icon;
     return (
       <div className="WeatherForecast">
         <div className="row">
@@ -31,5 +26,13 @@ export default function WeatherForcast(props) {
         </div>
       </div>
     );
+  } else {
+    let apiKey = "0td6fef782e8b046o3c9bf5a39fbbf05";
+    let city = props.data.city;
+    let apiUrl = `https://api.shecodes.io/weather/v1/forecast?query=${city}&key=${apiKey}&units=metric`;
+
+    axios.get(apiUrl).then(handleResponse);
+
+    return null;
   }
 }
