@@ -11,16 +11,24 @@ export default function WeatherForcast(props) {
   }
 
   if (loaded) {
-    let icon = forecast[0].condition.icon_url;
     return (
       <div className="WeatherForecast">
         <div className="row">
           <div className="col">
-            <div className="WeatherForecast-day">Thu</div>
-            <img src={icon} width={80} className="WeatherForecast-img" alt="" />
+            <div className="WeatherForecast-day">{forecast[0].time}</div>
+            <img
+              src={forecast[0].condition.icon_url}
+              width={80}
+              className="WeatherForecast-img"
+              alt=""
+            />
             <div className="WeatherForecast-temp">
-              <span className="WeatherForecast-temp-max">19°</span>
-              <span className="WeatherForecast-temp-min">10°</span>
+              <span className="WeatherForecast-temp-max">
+                {forecast[0].temperature.maximum}°
+              </span>
+              <span className="WeatherForecast-temp-min">
+                {forecast[0].temperature.minimum}°
+              </span>
             </div>
           </div>
         </div>
