@@ -6,12 +6,12 @@ export default function WeatherForcast(props) {
   let [loaded, setLoaded] = useState(false);
   let [forecast, setForecast] = useState(null);
   function handleResponse(response) {
-    setForecast(response.date.daily);
+    setForecast(response.data.daily);
     setLoaded(true);
   }
 
   if (loaded) {
-    let icon = props.data.daily.condition.icon;
+    let icon = forecast[0].condition.icon_url;
     return (
       <div className="WeatherForecast">
         <div className="row">
